@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Домашнє завдання — Promises</title>
+</head>
+<body>
+
+<h2>Відкрий консоль (F12)</h2>
+
+<script>
+  // ===============================
+  // Завдання 1 — Promise.all
+  // ===============================
+
+  function delayedPromise(value, delay) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(value);
+      }, delay);
+    });
+  }
+
+  const promisesAll = [
+    delayedPromise("A", 1000),
+    delayedPromise("B", 2000),
+    delayedPromise("C", 1500),
+    delayedPromise("D", 3000),
+    delayedPromise("E", 500)
+  ];
+
+  Promise.all(promisesAll)
+    .then((results) => {
+      console.log("Promise.all results:", results);
+    });
+
+  // ===============================
+  // Завдання 2 — Promise.race
+  // ===============================
+
+  function randomDelay(value) {
+    const delay = Math.floor(Math.random() * 4000) + 1000;
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(value);
+      }, delay);
+    });
+  }
+
+  const promisesRace = [
+    randomDelay("One"),
+    randomDelay("Two"),
+    randomDelay("Three"),
+    randomDelay("Four"),
+    randomDelay("Five")
+  ];
+
+  Promise.race(promisesRace)
+    .then((result) => {
+      console.log("Promise.race winner:", result);
+    });
+</script>
+
+</body>
+</html>
